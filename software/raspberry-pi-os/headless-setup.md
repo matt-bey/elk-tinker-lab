@@ -12,6 +12,13 @@ Use Raspberry Pi Imager for all new setups. The **Advanced Options** (gear icon)
 
 This is the clean modern path. The manual `ssh` file + `wpa_supplicant.conf` method still works for older Buster images.
 
+## Trixie Note
+
+Trixie Lite uses **cloud-init** for first-boot configuration instead of the `firstrun.sh`
+approach used in older versions. WiFi and SSH customizations made outside of Raspberry Pi
+Imager's built-in settings may be silently dropped. Always use Imager's built-in
+configuration options for Trixie.
+
 ## Buster-Specific (Older Images)
 
 After flashing to SD card, mount the `/boot` partition and create:
