@@ -26,28 +26,33 @@ Mark quantities as approximate when unsure. Update when items are acquired or si
 
 ## Displays
 
-| Component                         | Qty | Notes                                                   |
-| --------------------------------- | --- | ------------------------------------------------------- |
-| Velleman VMP400 3.5" SPI TFT      | 1   | ILI9341, GPIO HAT, fully configured with tft35a overlay |
-| OSOYOO 3.5" HDMI LCD              | 1   | Purchased by mistake — no audio jack, being returned    |
-| Waveshare 3.5" HDMI LCD (480x320) | 1   | In transit — has 3.5mm audio jack, GPIO powered         |
+| Component                         | Qty | Notes                                                                      |
+| --------------------------------- | --- | -------------------------------------------------------------------------- |
+| Velleman VMP400 3.5" SPI TFT      | 1   | ILI9341, GPIO HAT, fully configured with tft35a overlay                    |
+| OSOYOO 3.5" HDMI LCD              | 1   | Purchased by mistake — no audio jack, being returned                       |
+| Waveshare 3.5" HDMI LCD (480x320) | 1   | In transit — has 3.5mm audio jack, GPIO powered                            |
+| 7-Segment Display (1-digit)       | 1   | Miuzei kit                                                                 |
+| 7-Segment Display (4-digit)       | 1   | Miuzei kit — commonly paired with 74HC595 shift register for GPIO efficiency |
 
 ## Audio
 
 | Component                  | Qty | Notes                                                           |
 | -------------------------- | --- | --------------------------------------------------------------- |
-| PAM8403 amplifier board    | 5   | 5V, 2x3W, volume potentiometer — ordered                        |
-| Gikfun 2" 4Ω 3W speakers   | 2   | Full range — ordered                                            |
-| USB audio DAC              | 1   | Small USB dongle, confirmed working on Buster                   |
-| 3.5mm stereo to bare wire  | 1   | Ordered                                                         |
-| Portable Bluetooth speaker | 1   | Unbranded, battery-powered, 3.5mm jack — used for audio testing |
+| PAM8403 amplifier board    | 5   | 5V, 2x3W, volume potentiometer — ordered                                                   |
+| Adafruit PAM8302 amp       | 1   | 2.5W mono Class D; JST-PH input, screw terminal output, SD/mute pin; 3.3–5.5V — Pi-friendly |
+| Gikfun 2" 4Ω 3W speakers   | 2   | Full range — ordered                                                                        |
+| CQRobot speaker 3W/8Ω     | 1   | 2.54mm Dupont connector — use with PAM8302 or similar amp, not direct GPIO                  |
+| USB audio DAC              | 1   | Small USB dongle, confirmed working on Buster                                               |
+| 3.5mm stereo to bare wire  | 1   | Ordered                                                                                     |
+| Portable Bluetooth speaker | 1   | Unbranded, battery-powered, 3.5mm jack — used for audio testing                             |
 
 ## Breakout Boards & Modules
 
 | Component                                   | Qty | Notes                                                                                       |
 | ------------------------------------------- | --- | ------------------------------------------------------------------------------------------- |
-| Inland/Keyes 37-in-1 Sensor Kit (MC 900852) | 1   | Full module list below                                                                      |
+| Inland/Keyes 37-in-1 Sensor Kit (MC 900852) | 1   | Full module list below                                                                       |
 | ADS1115 ADC breakout board                  | 3   | 16-bit, 4-channel, I2C (0x48–0x4B) — for analog sensors from 37-in-1 kit — pending purchase |
+| Miuzei breadboard power supply module       | 1   | 5V + 3.3V rail output; USB-A or barrel connector input (Miuzei starter kit)                  |
 
 ### Keyes 37-in-1 Sensor Kit Modules
 
@@ -93,24 +98,80 @@ Mark quantities as approximate when unsure. Update when items are acquired or si
 
 ## Passive Components
 
-| Component               | Qty  | Notes          |
-| ----------------------- | ---- | -------------- |
-| Resistors (assorted)    | ~200 | Various values |
-| LEDs (assorted)         | ~30  | Various colors |
-| Momentary push buttons  | ~10  | Various sizes  |
-| Breadboards (full size) | 2    |                |
-| Dupont wires M-M        | ~40  |                |
-| Dupont wires M-F        | ~40  |                |
+### Resistors (Miuzei kit — 10 each)
+
+| Value  | Value  | Value  | Value  | Value  |
+| ------ | ------ | ------ | ------ | ------ |
+| 10Ω    | 100Ω   | 220Ω   | 330Ω   | 1KΩ    |
+| 2KΩ    | 5.1KΩ  | 10KΩ   | 100KΩ  | 1MΩ    |
+
+### Capacitors (Miuzei kit)
+
+| Component                  | Qty |
+| -------------------------- | --- |
+| Electrolytic 10µF 50V      | 10  |
+| Electrolytic 100µF 50V     | 10  |
+| Ceramic 104 (100nF)        | 10  |
+| Ceramic 22pF               | 10  |
+
+### Semiconductors & Discrete ICs
+
+| Component                     | Qty | Notes                                                           |
+| ----------------------------- | --- | --------------------------------------------------------------- |
+| LED assorted (W/Y/B/G/R)      | ~80 | ~50 from Miuzei kit + ~30 misc                                  |
+| RGB LED                       | 2   | Miuzei kit                                                      |
+| Diode 1N4007                  | 5   | Miuzei kit                                                      |
+| Diode 4148                    | 5   | Miuzei kit                                                      |
+| NPN Transistor 2N3904/PN2222  | 10  | Miuzei kit (5+5)                                                |
+| Photoresistor 5528 (LDR)      | 2   | Miuzei kit — analog, needs ADC on Pi                            |
+| Thermistor 103                | 2   | Miuzei kit — analog, needs ADC on Pi                            |
+| Tilt Switch SW-520D           | 1   | Miuzei kit                                                      |
+| Active buzzer                 | 1   | Miuzei kit (discrete component)                                 |
+| Passive buzzer                | 1   | Miuzei kit (discrete component)                                 |
+| 4N35 Optocoupler              | 1   | Miuzei kit — isolates Pi GPIO from higher-voltage circuits      |
+| 74HC595 Shift Register        | 1   | Miuzei kit — serial-in/parallel-out; pair with 7-seg displays   |
+
+### Buttons & Controls
+
+| Component              | Qty | Notes                         |
+| ---------------------- | --- | ----------------------------- |
+| Momentary push buttons | ~20 | ~10 misc + 10 from Miuzei kit |
+| Potentiometer 10KΩ     | 2   | Miuzei kit                    |
+
+### Breadboards & Headers
+
+| Component                         | Qty | Notes                                                            |
+| --------------------------------- | --- | ---------------------------------------------------------------- |
+| Breadboard, full size (830-point) | 3   | 2 existing + 1 from Miuzei kit                                   |
+| Pin header, 40-pin male (2×20)    | 7   | 2 from Miuzei kit + 5× Schmartboard 920-0197-01 (2.54mm, RoHS)  |
 
 ## Wire & Connectors
 
 | Component                     | Qty      | Notes                                                       |
 | ----------------------------- | -------- | ----------------------------------------------------------- |
-| 22 AWG stranded silicone wire | 6 spools | White, black, red, blue, yellow, green — ~25 ft each        |
-| HDMI cables                   | Several  | Various lengths; micro-HDMI and mini-HDMI adapters included |
-| USB OTG adapters              | ~5       | For Pi Zero boards                                          |
-| Portable USB hub              | 1        | 3-port                                                      |
-| Alligator clip leads          | 6        | Wire with alligator clips on both ends                      |
+| 22 AWG stranded silicone wire       | 6 spools | White, black, red, blue, yellow, green — ~25 ft each        |
+| HDMI cables                         | Several  | Various lengths; micro-HDMI and mini-HDMI adapters included |
+| USB OTG adapters                    | ~5       | For Pi Zero boards                                          |
+| Portable USB hub                    | 1        | 3-port                                                      |
+| Alligator clip leads                | 6        | Wire with alligator clips on both ends                      |
+| Jumper wires, assorted              | 65       | Miuzei kit                                                  |
+| Jumper wires, solderless (set)      | 140      | Miuzei kit                                                  |
+| Female-to-male Dupont wires (20cm)  | 20       | Miuzei kit                                                  |
+
+## Hardware & Fasteners
+
+| Component                   | Qty | Notes                                                                           |
+| --------------------------- | --- | ------------------------------------------------------------------------------- |
+| M2.5 Nut                    | 25  | Micro Connectors SCW-114PC kit — standard Pi mounting size                      |
+| M2.5×6 Standoff (F-F)       | 8   | Brass                                                                           |
+| M2.5×10 Standoff (F-F)      | 8   | Brass                                                                           |
+| M2.5×15 Standoff (F-F)      | 8   | Brass                                                                           |
+| M2.5×20 Standoff (F-F)      | 8   | Brass                                                                           |
+| M2.5×6+6 Standoff (M-F)     | 8   | Brass                                                                           |
+| M2.5×10+6 Standoff (M-F)    | 8   | Brass                                                                           |
+| M2.5×15+6 Standoff (M-F)    | 8   | Brass                                                                           |
+| M2.5×20+6 Standoff (M-F)    | 8   | Brass                                                                           |
+| M2.5×6 Screw                | 25  |                                                                                 |
 
 ## Computers & Admin Machines
 
@@ -128,7 +189,6 @@ Mark quantities as approximate when unsure. Update when items are acquired or si
 | Maiyum 63/37 solder wire         | Tin-lead rosin core, 0.6mm, 50g                                      |
 | Lead-free solder                 | Rosin core                                                           |
 | TOWOT desoldering kit            | Solder wick + no-clean flux paste                                    |
-| Multimeter                       | 2 (mine + son's) — nothing fancy, both functional                    |
-| Breadboard power supply          | 5V + 3.3V rail output; USB-A or barrel connector input               |
+| Multimeter                       | 2 (mine + son's) — nothing fancy, both functional                                           |
 | Creality Ender 3 V3 KE           | FDM, 220×220×240mm, direct drive, auto-level, Klipper, WiFi — needs dialing in; plan to upgrade to a higher-tier model |
 | iPad charger 5V/2.1A             | Confirmed sufficient for Pi Zero W arcade build                      |
