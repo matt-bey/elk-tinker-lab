@@ -54,6 +54,24 @@ See inventory.md for the full workbench inventory. Key boards:
 No CI, no linting, no test suite at the repo level. Individual projects may contain
 their own build artifacts (requirements.txt, Makefile, etc.) scoped to that project.
 
+## Commit Style
+
+Use [Conventional Commits](https://www.conventionalcommits.org/): `type(scope): description`
+
+Types for this repo:
+
+| Type      | Use for                                          |
+|-----------|--------------------------------------------------|
+| `project` | New project or major project milestone           |
+| `docs`    | README, ADRs, DECISIONS.md, component docs       |
+| `config`  | Pi/Arduino config files                          |
+| `hw`      | Wiring diagrams, pinouts, schematic notes        |
+| `inv`     | inventory.md updates                             |
+| `fix`     | Corrections to docs or configs                   |
+| `chore`   | Repo structure, template changes, scripts        |
+
+Scope is optional but helpful: `docs(mini-crt-arcade)`, `config(retropie)`, `hw(pam8403)`.
+
 ## Custom Commands
 
 - /project:new-project <name> — scaffold a new project from _template

@@ -23,6 +23,12 @@ software/        # OS and software configuration
 
 See [inventory.md](inventory.md) for what's on the bench — boards, displays, audio, passives, and tools.
 
+## Contributing
+
+Commits follow [Conventional Commits](https://www.conventionalcommits.org/): `type(scope): description`
+
+Types: `project`, `docs`, `config`, `hw`, `inv`, `fix`, `chore`
+
 ## Navigation
 
 - **Starting a new project?** Copy `projects/_template/` and rename it.
