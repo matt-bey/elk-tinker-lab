@@ -53,7 +53,11 @@ The VMP400 uses the following GPIO pins (physical pin numbers):
 
 Pins not listed above are NC (not connected) and are free for other use.
 
-**Note on I2S audio conflict:** GPIO 18 (physical pin 12) is used by I2S audio. This pin is NOT used by the VMP400, so I2S audio is theoretically compatible — however physical access to pin 12 may be obstructed since the VMP400 HAT covers the full 40-pin header.
+**HAT blocks full header:** The VMP400 sits over the entire 40-pin header. All pins are electrically available, but none are physically accessible while the HAT is attached — no room to clip a wire or probe a pin.
+
+**SPI bus conflicts:** The VMP400 occupies SPI0 CE0 (GPIO 8) for the display and CE1 (GPIO 7) for the touchscreen. Adding a second SPI device requires either a free CE line or a software-controlled chip select on any spare GPIO.
+
+**Note on I2S audio conflict:** GPIO 18 (physical pin 12) is used by I2S audio. This pin is NOT used by the VMP400, so I2S audio is theoretically compatible — however physical access is obstructed while the HAT is attached.
 
 ---
 

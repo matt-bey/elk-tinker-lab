@@ -1,0 +1,19 @@
+# Pi Zero W config.txt — HDMI display mode (Waveshare 3.5" HDMI LCD)
+
+# HDMI display
+hdmi_force_hotplug=1
+hdmi_cvt=480 320 60 6 0 0 0
+hdmi_group=2
+hdmi_mode=87
+gpu_mem=128
+
+# Audio (via HDMI to display's 3.5mm jack)
+dtparam=audio=on
+hdmi_drive=2
+
+[pi4]
+dtoverlay=vc4-fkms-v3d
+max_framebuffers=2
+
+[all]
+overscan_scale=1

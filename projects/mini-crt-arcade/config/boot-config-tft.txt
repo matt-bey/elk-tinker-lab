@@ -1,0 +1,24 @@
+# Pi Zero W config.txt — TFT display mode (Velleman VMP400)
+
+# SPI and TFT display driver
+dtparam=spi=on
+dtoverlay=tft35a:rotate=90
+
+# Virtual HDMI framebuffer (fbcp copies this to the TFT)
+framebuffer_depth=16
+framebuffer_ignore_alpha=1
+hdmi_force_hotplug=1
+hdmi_cvt=320 240 60 1 0 0 0
+hdmi_group=2
+hdmi_mode=87
+gpu_mem=128
+
+# Audio
+dtparam=audio=on
+
+[pi4]
+dtoverlay=vc4-fkms-v3d
+max_framebuffers=2
+
+[all]
+overscan_scale=1
