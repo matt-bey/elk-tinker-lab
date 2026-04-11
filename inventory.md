@@ -16,7 +16,7 @@ Mark quantities as approximate when unsure. Update when items are acquired or si
 | Raspberry Pi 2B      | 1   | Low-stakes tinkering, running Bookworm                                                                     |
 | Raspberry Pi 4 (4GB) | 1   | Son's dev/experimentation machine — GPIO breakout board attached, RDP from iPad Air (4th gen), Scratch 3   |
 | Raspberry Pi 4 (2GB) | 1   | Recalbox OS — NES, SNES, Genesis, N64 game library                                                         |
-| Raspberry Pi 5 (8GB) | 1   | Antique phone AI operator project                                                                          |
+| Raspberry Pi 5 (8GB) | 1   | [Antique telephone AI operator project](projects/antique-telephone-ai-operator/)                           |
 
 ## Microcontrollers
 

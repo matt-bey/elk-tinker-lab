@@ -2,9 +2,11 @@
 
 A personal monorepo for Raspberry Pi and Arduino tinkering projects — a combined knowledge base, config store, and project workspace. Built solo and with my son.
 
-## Active Project
+## Active Projects
 
 **[Mini CRT Arcade Box](projects/mini-crt-arcade/)** — A desk-sitting retro arcade box styled as a miniature CRT television. Raspberry Pi Zero W running RetroPie with HDMI display and PAM8403 amplifier audio.
+
+**[Antique Telephone AI Operator](projects/antique-telephone-ai-operator/)** — Convert a Kellogg Chicago antique wood wall telephone (early 1900s) into an AI-powered VoIP device. Raspberry Pi 5 running a 1920s-style AI telephone operator (Whisper STT → Claude Haiku → Piper TTS) with SIP/VoIP calling. Source: [matt-bey/elk-antique-telephone-ai-operator](https://github.com/matt-bey/elk-antique-telephone-ai-operator)
 
 ## Structure
 
