@@ -110,16 +110,25 @@ Mark quantities as approximate when unsure. Update when items are acquired or si
 | HDMI cables                   | Several  | Various lengths; micro-HDMI and mini-HDMI adapters included |
 | USB OTG adapters              | ~5       | For Pi Zero boards                                          |
 | Portable USB hub              | 1        | 3-port                                                      |
+| Alligator clip leads          | 6        | Wire with alligator clips on both ends                      |
+
+## Computers & Admin Machines
+
+| Machine            | Notes                                                                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| MacBook            | Primary admin machine — SSH, nmap, Raspberry Pi Imager                                                                       |
+| Mini-ITX Desktop   | NVIDIA RTX 3060 12GB, 600W PSU, Ubuntu 24.04 LTS — primary LLM inference machine (Ollama: qwen2.5-coder:14b-instruct-q4_K_M) |
+| iPad Air (4th gen) | Son's machine — RDPs to Pi 4 (4GB) for Scratch 3 development                                                                 |
 
 ## Tools
 
-| Tool                     | Notes                                                                                                                        |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| WEP 948DQ-III            | Fume extractor + soldering station (2-in-1) — replaced old wood-burning multi-tool                                           |
-| Maiyum 63/37 solder wire | Tin-lead rosin core, 0.6mm, 50g                                                                                              |
-| Lead-free solder         | Rosin core                                                                                                                   |
-| TOWOT desoldering kit    | Solder wick + no-clean flux paste                                                                                            |
-| MacBook                  | Primary admin machine — SSH, nmap, Raspberry Pi Imager                                                                       |
-| Mini-ITX Desktop         | NVIDIA RTX 3060 12GB, 600W PSU, Ubuntu 24.04 LTS — primary LLM inference machine (Ollama: qwen2.5-coder:14b-instruct-q4_K_M) |
-| iPad Air (4th gen)       | Son's machine — RDPs to Pi 4 (4GB) for Scratch 3 development                                                                 |
-| iPad charger 5V/2.1A     | Confirmed sufficient for Pi Zero W arcade build                                                                              |
+| Tool                     | Notes                                           |
+| ------------------------ | ----------------------------------------------- |
+| WEP 948DQ-III                    | Fume extractor + soldering station (2-in-1)                          |
+| Maiyum 63/37 solder wire         | Tin-lead rosin core, 0.6mm, 50g                                      |
+| Lead-free solder                 | Rosin core                                                           |
+| TOWOT desoldering kit            | Solder wick + no-clean flux paste                                    |
+| Multimeter                       | 2 (mine + son's) — nothing fancy, both functional                    |
+| Breadboard power supply          | 5V + 3.3V rail output; USB-A or barrel connector input               |
+| Creality Ender 3 V3 KE           | FDM, 220×220×240mm, direct drive, auto-level, Klipper, WiFi — needs dialing in; plan to upgrade to a higher-tier model |
+| iPad charger 5V/2.1A             | Confirmed sufficient for Pi Zero W arcade build                      |
