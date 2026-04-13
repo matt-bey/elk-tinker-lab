@@ -51,6 +51,26 @@ alsamixer    # F6 to select card, arrow keys to adjust
 sudo alsactl store    # Persist volume setting
 ```
 
+### Volume cap (battery power management)
+
+ALSA volume is capped at **70%** to limit PAM8403 current draw on battery. Class D amp
+power draw scales with signal amplitude squared — a 70% software cap meaningfully reduces
+average battery drain during gameplay without noticeable volume loss at normal listening levels.
+
+This is applied automatically by `setup.sh` and persisted in `/var/lib/alsa/asound.state`.
+To adjust manually on the Pi:
+
+```bash
+amixer -c 0 sset PCM 70%   # Set cap (change % as needed)
+sudo alsactl store           # Persist across reboots
+```
+
+If the PCM control name differs on your card, find it with:
+
+```bash
+amixer controls
+```
+
 ## SSH Access
 
 ```bash

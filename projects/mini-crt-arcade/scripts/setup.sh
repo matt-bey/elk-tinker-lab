@@ -6,7 +6,7 @@ set -e
 
 PI_HOST="${PI_HOST:-retropie.local}"
 PI_USER="${PI_USER:-pi}"
-SSH_KEY="${SSH_KEY:-$HOME/.ssh/pi_key}"
+SSH_KEY="${SSH_KEY:-$HOME/.ssh/elkpi_key}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$SCRIPT_DIR/../config"
 
@@ -87,6 +87,17 @@ fi
 EOF
     sudo chmod +x /usr/local/bin/display-switch
     echo 'display-switch installed.'
+"
+
+# Set ALSA volume cap at 70% to limit PAM8403 power draw on battery
+# Class D amp power draw scales with signal amplitude — capping software volume
+# reduces average current draw from the 18650 cell during normal gameplay.
+# Persists across reboots via /var/lib/alsa/asound.state
+echo "Setting audio volume cap..."
+ssh -i "$SSH_KEY" "$PI_USER@$PI_HOST" "
+    amixer -c 0 sset PCM 70% 2>/dev/null || amixer sset PCM 70% 2>/dev/null || echo 'Warning: could not set PCM volume — verify control name with: amixer controls'
+    sudo alsactl store
+    echo 'Audio volume set to 70% and persisted.'
 "
 
 # Deploy configs

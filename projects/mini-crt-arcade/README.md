@@ -37,3 +37,4 @@ See [HARDWARE.md](HARDWARE.md) for full bill of materials.
 - [ADR 001 — Display selection](adr/001-display-selection.md)
 - [ADR 002 — Abandoned GPIO controls](adr/002-abandoned-gpio-controls.md)
 - [ADR 003 — Audio approach](adr/003-audio-approach.md)
+- [ADR 004 — Power supply v2](adr/004-power-supply-v2.md)
