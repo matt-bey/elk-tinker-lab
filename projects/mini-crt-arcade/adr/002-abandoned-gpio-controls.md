@@ -1,7 +1,7 @@
 # ADR 002 — Abandoned: Built-in GPIO Arcade Controls
 
 **Status:** Abandoned
-**Date:** 2025
+**Date:** 2026
 
 ## Context
 

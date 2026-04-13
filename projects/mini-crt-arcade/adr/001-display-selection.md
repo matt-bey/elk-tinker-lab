@@ -1,7 +1,7 @@
 # ADR 001 — Display Selection
 
 **Status:** Decided
-**Date:** 2025
+**Date:** 2026
 
 ## Context
 

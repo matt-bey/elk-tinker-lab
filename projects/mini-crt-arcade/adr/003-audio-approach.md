@@ -1,7 +1,7 @@
 # ADR 003 — Audio Approach
 
 **Status:** Decided (partially implemented)
-**Date:** 2025
+**Date:** 2026
 
 ## Context
 

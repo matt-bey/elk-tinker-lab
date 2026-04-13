@@ -2,7 +2,7 @@
 
 **Status:** Active
 **Hardware:** Raspberry Pi Zero W
-**Started:** 2025
+**Started:** 2026
 
 A desk-sitting retro arcade box styled to look like a miniature CRT television. Runs RetroPie on a Pi Zero W. Display and audio connect via HDMI. USB controller plugs into the side for gameplay.
 
