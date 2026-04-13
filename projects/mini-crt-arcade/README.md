@@ -18,13 +18,12 @@ Then reboot the Pi. See SOFTWARE.md for full details.
 ## Current Status
 
 - ✅ Pi Zero W running RetroPie with NES ROMs
-- ✅ Velleman VMP400 TFT display working (fbcp + tft35a overlay)
-- ✅ Display swap script in place (TFT ↔ HDMI)
-- ✅ USB audio DAC working as temporary audio solution
+- ✅ Waveshare 3.5inch HDMI LCD (E) — 640×480, HDMI audio, powered via pogo pins
+- ✅ PAM8403 amplifier + 2x speakers wired and working
+- ✅ Full audio chain: Pi → HDMI → display 3.5mm → PAM8403 → speakers
+- ✅ v1 cardboard enclosure — prototype self-contained and working
+- ✅ Velleman VMP400 TFT retained as backup display
 - ✅ SD card backup taken
-- ⏳ Waveshare 3.5" HDMI display — in transit
-- ⏳ PAM8403 + speakers — ordered
-- ⏳ Enclosure — not yet started
 
 ## Hardware
 

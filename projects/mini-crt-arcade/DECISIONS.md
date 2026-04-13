@@ -29,5 +29,5 @@ Minor project-specific decisions. Major decisions are in `/adr/`.
 
 ## 2025 — RetroArch aspect ratio: force 4:3
 
-**Decision:** Configure RetroArch to letterbox at 4:3 rather than stretching to fill the 3:2 display.
-**Reason:** NES games were designed for 4:3 TVs. Horizontal stretch changes the look of sprites and is visually wrong. Small black bars on sides are preferable.
+**Decision:** Configure RetroArch to force 4:3 aspect ratio.
+**Reason:** NES games were designed for 4:3 TVs. The Waveshare (E) display is native 4:3 (640×480), so no letterboxing occurs — this setting simply locks the correct ratio and prevents any accidental stretch if resolution changes.

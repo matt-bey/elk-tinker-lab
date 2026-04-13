@@ -49,4 +49,4 @@ And in RetroArch: `audio_device = "hw:1,0"`
 
 ## Status
 
-PAM8403 and speakers ordered. HDMI display in transit. Audio chain not yet fully assembled.
+Fully assembled and working. v1 prototype self-contained in cardboard enclosure.

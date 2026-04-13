@@ -1,10 +1,10 @@
 # Pi Zero W config.txt — HDMI display mode (Waveshare 3.5" HDMI LCD)
 
-# HDMI display
+# HDMI display — Waveshare 3.5inch HDMI LCD (E), 640x480 native
 hdmi_force_hotplug=1
-hdmi_cvt=480 320 60 6 0 0 0
 hdmi_group=2
-hdmi_mode=87
+hdmi_mode=4
+display_rotate=2
 gpu_mem=128
 
 # Audio (via HDMI to display's 3.5mm jack)
