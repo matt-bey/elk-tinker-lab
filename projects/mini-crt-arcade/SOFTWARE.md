@@ -61,14 +61,14 @@ This is applied automatically by `setup.sh` and persisted in `/var/lib/alsa/asou
 To adjust manually on the Pi:
 
 ```bash
-amixer -c 0 sset PCM 70%   # Set cap (change % as needed)
-sudo alsactl store           # Persist across reboots
+amixer -c 0 sset HDMI 70%   # Set cap (change % as needed)
+sudo alsactl store                              # Persist across reboots
 ```
 
-If the PCM control name differs on your card, find it with:
+Verify available controls with:
 
 ```bash
-amixer controls
+amixer -c 0 controls
 ```
 
 ## SSH Access

@@ -95,7 +95,7 @@ EOF
 # Persists across reboots via /var/lib/alsa/asound.state
 echo "Setting audio volume cap..."
 ssh -i "$SSH_KEY" "$PI_USER@$PI_HOST" "
-    amixer -c 0 sset PCM 70% 2>/dev/null || amixer sset PCM 70% 2>/dev/null || echo 'Warning: could not set PCM volume — verify control name with: amixer controls'
+    amixer -c 0 sset HDMI 70%
     sudo alsactl store
     echo 'Audio volume set to 70% and persisted.'
 "
