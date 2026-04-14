@@ -36,6 +36,12 @@ scp -i "$SSH_KEY" "$CONFIG_DIR/retroarch.cfg" \
     "$PI_USER@$PI_HOST:/opt/retropie/configs/all/retroarch.cfg"
 echo "RetroArch config deployed."
 
+# Deploy NES system overrides (crt-pi shader)
+ssh -i "$SSH_KEY" "$PI_USER@$PI_HOST" "mkdir -p /opt/retropie/configs/nes"
+scp -i "$SSH_KEY" "$CONFIG_DIR/retroarch-nes.cfg" \
+    "$PI_USER@$PI_HOST:/opt/retropie/configs/nes/retroarch.cfg"
+echo "NES RetroArch overrides deployed."
+
 # Deploy ALSA audio config
 scp -i "$SSH_KEY" "$CONFIG_DIR/asound.conf" "$PI_USER@$PI_HOST:/tmp/asound.conf"
 ssh -i "$SSH_KEY" "$PI_USER@$PI_HOST" "sudo mv /tmp/asound.conf /etc/asound.conf"
