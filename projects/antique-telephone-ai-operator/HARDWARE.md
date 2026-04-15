@@ -42,18 +42,39 @@ The clapper visibly moves when driven by the magneto crank (~3mA at 5V) but does
 | Carbon microphone bias circuit | 12V DC bias from 12V rail (see power architecture below); custom preamp with adjustable bias | 🔲 Planned | — |
 | Crank signal conditioning | 4N35 optocoupler + 1N4148 + 1KΩ + 10KΩ pull-up — all parts on hand; handles 3–6V AC input safely | 🔲 Planned | On hand |
 | Relay driver circuit | 2N3904 + 1N4007 + 5V relay — switches ring generator output to ringer coil; all parts on hand | 🔲 Planned | On hand |
-| Ring generator module | 12V DC in → 90V AC at 20Hz out; must handle 1604Ω load — verify spec before purchasing | 🔲 Planned — needs purchase | eBay / Etsy (~$10–20) |
+| Ring generator module | 12V DC in → 90V AC at 20Hz out; must handle 1604Ω load — verify spec before purchasing | 🔲 Planned — needs purchase | See options below |
+
+#### Ring Generator Candidate Modules
+
+| Module | Input | Output | Notes | Link |
+|---|---|---|---|---|
+| Sandman DSI9P Ring Voltage Booster | 12V DC | **90V AC** | PCB pin module — same form factor as IRM PSUs; confirm 20Hz before ordering; may need to call to order | [sandman.com](https://www.sandman.com/products/dsi9p-ring-voltage-booster-chassis-ring-generator-module) |
+| Black Magic Ringing Generator | 12V DC | 86V AC / 20Hz | eBay listing — close to 90V spec | [eBay](https://www.ebay.com/itm/126389641484) |
+| PowerDsine PCR-SIN03V12F20-C | 12V DC | 70V AC / 20Hz | Bare PCB telecom module — lower voltage, may produce weaker bell strike | [eBay](https://www.ebay.com/itm/253414551080) |
+| Model Railroad Control Systems | 12V DC | 70V AC / 20Hz | Designed for antique telephone bells in model railroad setups — same use case | [modelrailroadcontrolsystems.com](https://www.modelrailroadcontrolsystems.com/ringing-generator-module-and-ringer/) |
+
+**Preferred:** Sandman DSI9P (90V output, correct form factor). Confirm output frequency is 20Hz before purchasing.
+
+#### Sandman DSI9P — Questions Before Ordering (call their office)
+
+The DSI9P is described as a component for their 25-line chassis (DSI9O). Need to confirm it can run standalone before purchasing.
+
+1. Can the DSI9P be powered and used **standalone** with just 12V DC in — no DSI9O chassis required?
+2. What is the **pinout** on the bottom pins? Which pins are +12V in, GND, and the two AC output terminals?
+3. Is the output frequency fixed at **20Hz**?
+
+Note: the DSI9Q Line Card is a separate product (one per phone line in the chassis) — do **not** order this.
 
 ### LM386 Bill of Materials (Planned)
 
 | Component | Value / Details |
 |---|---|
-| LM386 Audio Amplifier IC | 8-pin DIP |
-| Electrolytic capacitor C1 | 10µF — input coupling |
-| Electrolytic capacitor C2 | 220µF — output coupling |
-| Ceramic capacitor C3 | 0.1µF — power supply decoupling |
-| Potentiometer | 10kΩ — volume control |
-| 8-pin IC socket | — |
+| LM386 Audio Amplifier IC | 8-pin DIP | ⚠️ Check on hand |
+| Electrolytic capacitor C1 | 10µF — input coupling | ✅ On hand |
+| Electrolytic capacitor C2 | 220µF — output coupling | 🔲 Needs purchase |
+| Ceramic capacitor C3 | 0.1µF — power supply decoupling | ✅ On hand |
+| Potentiometer | 10kΩ — volume control | ✅ On hand |
+| 8-pin IC socket | — | 🔲 Needs purchase |
 
 **LM386 key specs:** default gain 20× (26dB), up to 200× with modification; drives 63Ω earpiece comfortably at 5V supply.
 
@@ -88,10 +109,10 @@ All parts on hand.
 | Component | Details | Status | Source |
 |---|---|---|---|
 | Mains inlet cable | 3-prong extension cord (cut) — L/N/E feed into box | 🔲 Planned — use spare extension cord | On hand |
-| Inline fuse holder | Panel-mount, 120V AC rated, 1A or 2A fuse — on L (black) wire before PSUs | 🔲 Planned — needs purchase | ~$3–5 |
-| Mean Well IRM-30-5 (or equivalent) | PCB-mount, 5V/5A, mains AC in — powers Pi 5 via USB-C | 🔲 Planned — needs purchase | ~$15–20 |
-| Mean Well IRM-15-12 (or equivalent) | PCB-mount, 12V/1A, mains AC in — powers ring generator + carbon mic bias | 🔲 Planned — needs purchase | ~$15–20 |
-| Screw terminal block (barrier strip) | Distributes 12V+ and common GND to all circuits | 🔲 Planned — needs purchase | ~$3–5 |
+| Inline fuse holder + fuses | BOJACK inline screw type, 5×20mm, 250V, 16 AWG leads — 1A fuse; splices into L wire | 🛒 Ordered | Amazon |
+| Mean Well IRM-30-5 (or equivalent) | PCB-mount, 5V/6A, mains AC in — powers Pi 5 via GPIO 5V pins | 🛒 Ordered | Amazon |
+| Mean Well IRM-30-12 (or equivalent) | PCB-mount, 12V/2.5A, mains AC in — powers ring generator + carbon mic bias | 🛒 Ordered | Amazon |
+| Wire nuts | Join +12V rail wires and common GND wires — one nut per rail | ✅ On hand | — |
 
 **Mains wiring:** L and N daisy-chained between both PSU input terminals using stranded silicone wire (on hand). Earth connected to both PSU E terminals. Fuse on L wire before first PSU.
 
@@ -102,7 +123,7 @@ Extension cord (L, N, E)
         │
         ├──→ IRM-30-5  L ──┐  N ──┐  E
         │                  │      │
-        └──→ IRM-15-12  L ←┘  N ←┘  E
+        └──→ IRM-30-12  L ←┘  N ←┘  E
 ```
 
 ### DC Distribution
@@ -110,17 +131,19 @@ Extension cord (L, N, E)
 | Supply | Voltage | Load |
 |---|---|---|
 | IRM-30-5 | 5V / 5A | Raspberry Pi 5 (USB-C) |
-| IRM-15-12 | 12V / 1A | Ring generator module, carbon mic bias circuit |
+| IRM-30-12 | 12V / 2.5A | Ring generator module, carbon mic bias circuit |
 
-**Common ground:** Pi GND GPIO pin connects to the negative terminal block, tying both supply grounds together. Required for relay driver and signal circuits to share a reference.
+**Common ground:** Pi GND GPIO pin joins the GND wire nut, tying both supply grounds together. Required for relay driver and signal circuits to share a reference.
 
 **12V supply eliminates the DC-DC boost converter** previously planned — the 12V rail provides the bias voltage for the carbon microphone directly.
 
-### Terminal Block Layout (Planned)
+### Rail Joining (Wire Nuts)
+
++12V and GND rails are joined with wire nuts (on hand) — no terminal block needed.
 
 ```
-[+12V rail]              [Common GND]
-  IRM-15-12 (+)            IRM-15-12 (−)
+[+12V wire nut]          [Common GND wire nut]
+  IRM-30-12 (+)            IRM-30-12 (−)
   ring generator (+)       ring generator (−)
   carbon mic bias (+)      carbon mic bias (−)
                            Pi GND GPIO pin
