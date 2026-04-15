@@ -27,8 +27,15 @@ Speakers mount inside the enclosure behind vent/grille holes on the sides or top
 - Volume knob positioned for natural reach while seated at desk
 - All internal cable runs kept short
 
-## v2 Possibilities
+## 3D Printed Enclosure
 
-- 3D printed enclosure replacing cardboard
-- Proper speaker grille mesh
-- Printed bezel graphics
+Design files live in `enclosure/`. Built with [build123d](https://github.com/gumyr/build123d) (Python parametric CAD).
+
+- `enclosure_v2.py` — current working design: lofted CRT body, stepped bezel, flat stand
+
+## Reference Models
+
+Good starting points for shape/proportion reference — not used directly, just for visual guidance:
+
+- [Retro CRT TV by peaberry](https://www.thingiverse.com/thing:5820726) — the primary shape reference used during design
+- [Mini CRT TV enclosure](https://www.thingiverse.com/thing:5772841) — alternate proportions, useful for bezel detail reference

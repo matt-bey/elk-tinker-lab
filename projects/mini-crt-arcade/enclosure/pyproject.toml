@@ -1,0 +1,12 @@
+[project]
+name = "mini-crt-enclosure"
+version = "0.1.0"
+description = "3D enclosure model for the mini-CRT arcade project"
+requires-python = ">=3.11"
+dependencies = [
+    "build123d",
+    "ocp-vscode~=3.3.4",
+]
+
+[tool.uv.sources]
+build123d = { git = "https://github.com/gumyr/build123d" }
