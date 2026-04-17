@@ -50,14 +50,32 @@ wire directly to the Output pads — no USB connectors inside the enclosure.
 
 ### Why 18650 cell (not flat LiPo pouch)
 
-Flat LiPo pouches available on Amazon are universally limited to 1.5A by their onboard protection
-circuits. This is insufficient: the boost converter must step 3.7V → 5V, and at ~85% efficiency,
-delivering 1A at 5V requires ~1.6A from the cell. Under peak gaming load (~900–1000mA at 5V),
-the cell must supply ~1.4A continuously. A 1.5A-protected pouch has no margin and will trip.
+The core constraint is cell current: the boost converter must step 3.7V → 5V, and at ~85%
+efficiency, peak gaming load (~900–1000mA at 5V) requires ~1.6A continuously from the cell.
+Any battery whose protection circuit trips below that draw will cut out mid-game.
 
-18650 cylindrical cells from reputable vendors are rated 10–20A continuous discharge, providing
-ample headroom. **Samsung 30Q** (3000mAh, 15A continuous) from 18650batterystore.com is the
-recommended cell. Avoid Amazon for 18650 cells — counterfeits are prevalent.
+Flat LiPo pouches were thoroughly evaluated and ruled out on this basis:
+
+- **Amazon pouches:** universally limited to 1.5A protection circuits — insufficient, no margin
+- **Adafruit 2000mAh (#2011):** confirmed 500mA max discharge (DigiKey datasheet) — disqualified
+  at 3× under the required draw
+- **SparkFun 2Ah (PRT-13855):** overcurrent trip current unpublished; unacceptable uncertainty
+  for a known 1.6A load
+- **HobbyKing Turnigy 2000mAh 1S:** rated 1C = 2A max — only 25% margin, and requires connector
+  adaptation (JST-SYP → solder pads)
+- **Phone batteries:** use flat LiPo cells and handle 2–4A easily, but are not usable here —
+  their BMS PCB expects multi-pin communication with the phone's PMIC (thermistor, fuel gauge
+  lines); a TP4056 won't send those signals, and no phone battery is sold as a bare cell without
+  the phone-specific BMS attached
+
+The conclusion: **flat pouch protection circuits on any hobbyist-accessible product top out well
+below what this load requires.** The constraint is not the cell chemistry (phones prove pouches
+handle high current), it is that no commodity flat pouch with appropriate current ratings is
+available without either an incompatible BMS or inadequate protection.
+
+18650 cylindrical cells sidestep this entirely. **Samsung 30Q** (3000mAh, 15A continuous) from
+18650batterystore.com is the recommended cell — 9× headroom over peak draw, genuine cell,
+domestically shipped. Avoid Amazon for 18650 cells — counterfeits are prevalent.
 
 ### How the boost converter works
 
@@ -171,7 +189,8 @@ Samsung 30Q rated at 15A continuous — 9× headroom over peak draw.
 | Continue with wall charger (iPad charger) | No battery, no portability — fine for v1, not for v2 |
 | IP5306 bare breakout module | Original choice. Confirmed unavailable as commodity product in US market — doesn't exist as a standalone breakout board |
 | PiSugar 3 | Purpose-built for Pi Zero W, clean integration. Rejected: connects via pogo pins on the back of the Pi Zero W, which is already occupied by the Waveshare display |
-| Flat LiPo pouch (Amazon) | All options capped at 1.5A protection circuits — insufficient given boost converter current multiplication (~1.6A peak battery draw) |
+| Flat LiPo pouch (any hobbyist source) | Fully evaluated: Amazon (≤1.5A), Adafruit #2011 (500mA confirmed), SparkFun PRT-13855 (unspecified), HobbyKing Turnigy 2000mAh 1S (2A, 25% margin only). All ruled out — no commodity flat pouch with adequate current rating exists without an incompatible BMS or insufficient protection circuit. Cell chemistry is fine (phones use flat pouches at 2–4A), but maker-accessible products don't expose it usably. |
+| Phone battery (flat LiPo pouch, bare cell) | High current capable, but BMS PCB requires multi-pin communication with phone PMIC — TP4056 won't satisfy it. Not sold as bare cells. |
 
 ## Future Enhancements
 
