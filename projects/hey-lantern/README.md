@@ -1,4 +1,4 @@
-**Status:** Active
+**Status:** Paused
 
 # Hey Lantern
 
@@ -23,11 +23,19 @@ bash projects/hey-lantern/scripts/setup.sh
 
 ## Current Status
 
-- [x] Power architecture decided — dual-supply (5V DC + 120V mains via relay)
-- [ ] Hardware acquired and wired on bench (no enclosure yet)
-- [ ] Wake word detection running on Pi Zero 2W
-- [ ] Cloud STT + Claude API pipeline working end-to-end
-- [ ] TTS response playing through speakers
+**Software POC** (deploy to Pi Zero 2W, USB webcam mic as stand-in):
+- [x] Wake word → STT → Claude → TTS pipeline scaffolded
+- [x] Deploy scripts ready (`setup.sh`, `deploy.sh`, `deploy-software.sh`)
+- [ ] Initial deploy and smoke test on `elkpi02.local`
+- [ ] Wake word detection confirmed working (`hey_jarvis` stand-in)
+- [ ] End-to-end pipeline confirmed working (wake → transcribe → respond)
+- [ ] VAD-based recording (replaces fixed 5s window)
+- [ ] Custom "Hey Lantern" wake word model trained
+
+**Hardware integration** (requires physical build):
+- [x] Power architecture decided — dual-supply (5V DC + 120V mains via TRIAC dimmer)
+- [ ] Hardware acquired and wired on bench
+- [ ] I2S MEMS mic + I2S/USB DAC audio path confirmed
 - [ ] Activity LEDs wired and responding to pipeline state
 - [ ] Microphone installed in lantern hat
 - [ ] Speakers installed in propane valve cavity

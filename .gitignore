@@ -13,6 +13,7 @@ __pycache__/
 .venv/
 venv/
 *.egg-info/
+.env
 
 # Node
 node_modules/

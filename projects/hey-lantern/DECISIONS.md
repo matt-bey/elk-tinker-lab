@@ -62,6 +62,34 @@ approach ever feels like too much complexity inside the enclosure.
 
 ---
 
+## [2026-04-16] Software toolchain — uv + flat src/ layout
+
+**Decision:** Python dependencies managed with `uv`. Source files live flat under
+`software/src/` — no package nesting. `uv run python src/main.py` is the entry point.
+
+**Reason:** This is an application, not a library. The `src/` subdirectory keeps source
+files visually separate from build artifacts without the overhead of a proper package
+structure. Avoids the `hey-lantern/hey_lantern` naming collision that a `src/hey_lantern/`
+layout would create.
+
+---
+
+## [2026-04-16] POC audio input — USB webcam mic via USB-OTG
+
+**Decision:** Use a USB webcam mic via USB-OTG cable as the microphone for POC testing on
+the Pi Zero 2W.
+
+**Reason:** Allows full pipeline testing before the I2S MEMS microphone is purchased and
+wired. Pi Zero 2W has no onboard audio; USB audio is class-compliant and requires no driver.
+ALSA is configured to use card 0 (the USB device) as the default capture device.
+
+**TTS output for POC:** `TTS_ENABLED=false` in `.env` if no speaker is available — the
+pipeline still validates end-to-end with responses printed to console.
+
+**This is POC-only.** Final build uses an I2S MEMS mic (see HARDWARE.md).
+
+---
+
 ## [OPEN] Audio output path — USB DAC vs I2S DAC breakout
 
 **Decision:** Not yet made.
@@ -86,12 +114,21 @@ needed for something else, or if full-duplex I2S config proves straightforward o
 
 ---
 
-## [OPEN] Wake word engine — Porcupine vs openWakeWord
+## [2026-04-16] Wake word engine — openWakeWord
 
-**Decision:** Not yet made. See SOFTWARE.md for trade-off table.
+**Decision:** openWakeWord. Fully open source (Apache 2.0), runs offline, no account or
+API key required.
 
-Recommendation: start with Porcupine for faster bring-up on Pi Zero 2W; revisit if offline
-operation or licensing becomes a concern.
+**POC stand-in:** Pre-trained `hey_jarvis` model. Sufficient to validate the full pipeline
+end-to-end without waiting on custom model training.
+
+**Custom wake word plan:** Train a "Hey Lantern" model using openWakeWord's training pipeline
+(synthetic TTS data generation + fine-tune). Switch to Picovoice Porcupine only if the custom
+model proves unreliable — Porcupine's web console generates a custom `.ppn` in ~5 minutes but
+requires a free account and periodic internet check-in.
+
+**Alternatives considered:** Picovoice Porcupine — faster custom keyword bring-up but
+proprietary; rejected in favour of keeping the build fully open and offline.
 
 ---
 

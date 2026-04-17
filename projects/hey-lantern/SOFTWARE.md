@@ -3,7 +3,7 @@
 ## Base Image
 
 Raspberry Pi OS Bookworm Lite (64-bit, headless)
-Pi hostname: `hey-lantern`, user: `pi`
+Pi hostname: `elkpi02`, user: `matt`
 
 ## Architecture Overview
 
@@ -22,15 +22,13 @@ LED states track pipeline stage: idle pulse → listening → processing → spe
 
 ## Wake Word Engine
 
-**Decision open** — two viable options (see DECISIONS.md ADR-001 once filed):
+**Decision: openWakeWord** — fully open source, offline, Apache 2.0.
 
-| Option | Pros | Cons |
-|--------|------|------|
-| **openWakeWord** | Fully open source, customizable, free, runs on Pi Zero 2W | Requires training a custom model for "Hey Lantern"; setup is more involved |
-| **Picovoice Porcupine** | Custom wake word via web console (no training), easy Python SDK, free tier (1 wake word) | Proprietary; free tier requires internet check-in |
+POC uses the pre-trained `hey_jarvis` model as a stand-in. Final build will use a custom
+"Hey Lantern" `.onnx` model (generated via openWakeWord's training pipeline, or swap to
+Picovoice Porcupine if the custom model proves unreliable).
 
-Recommendation: start with Porcupine for faster bring-up; switch to openWakeWord if
-licensing or offline requirements become a concern.
+Set `WAKE_WORD_MODEL` in `.env` to a pre-trained model name or path to a `.onnx` file.
 
 ## Cloud Services
 
@@ -38,33 +36,45 @@ licensing or offline requirements become a concern.
 |------|---------|-------|
 | STT | OpenAI Whisper API | High accuracy, cheap per-minute pricing |
 | LLM | Anthropic Claude API | claude-haiku-4-5 for low latency responses |
-| TTS | Google Cloud TTS or ElevenLabs | ElevenLabs has better voice quality; Google is cheaper |
+| TTS | OpenAI TTS API | Same API key as Whisper; sufficient for POC. Swap to ElevenLabs for better voice quality in final build. |
 
-All API keys stored in `/etc/hey-lantern/secrets.env` on the Pi, not in this repo.
+API keys stored in `~/hey-lantern/.env` on the Pi (deployed via `deploy-software.sh`, never committed).
 
 ## Key Dependencies
 
+System packages (Pi only — not needed on Mac):
 ```bash
-sudo apt-get install -y python3-pip python3-venv portaudio19-dev libsndfile1
-
-pip install pvporcupine        # or openwakeword
-pip install anthropic           # Claude API
-pip install openai              # Whisper STT
-pip install sounddevice soundfile numpy
-pip install RPi.GPIO
+sudo apt-get install -y portaudio19-dev libsndfile1
 ```
 
-## Application Structure (planned)
+Python dependencies are managed with `uv` (see `software/pyproject.toml`):
+```bash
+cd projects/hey-lantern/software
+uv sync
+```
+
+## Application Structure
 
 ```
 software/
-├── main.py            # Main loop: wake word → record → STT → LLM → TTS → play
-├── wake_word.py       # Wake word detection wrapper (Porcupine or openWakeWord)
-├── stt.py             # Speech-to-text (Whisper API)
-├── llm.py             # Claude API call with conversation context
-├── tts.py             # Text-to-speech + audio playback
-├── leds.py            # GPIO LED state controller
-└── config.py          # Loads secrets.env, tunable parameters
+├── pyproject.toml     # uv-managed dependencies
+├── .python-version    # pins Python 3.11
+├── .env               # API keys + config (not in repo — copy from .env.example)
+├── .env.example       # template
+└── src/
+    ├── main.py        # Main loop: wake word → record → STT → LLM → TTS → play
+    ├── wake_word.py   # openWakeWord detection
+    ├── stt.py         # Whisper API transcription
+    ├── llm.py         # Claude API with conversation session context
+    ├── tts.py         # OpenAI TTS + sounddevice playback
+    └── config.py      # Loads .env, constants
+```
+
+Run the POC:
+```bash
+cd projects/hey-lantern/software
+cp .env.example .env  # then fill in API keys
+uv run python src/main.py
 ```
 
 ## Configuration
@@ -74,18 +84,17 @@ Config files live in `config/` and deploy to the Pi via `scripts/deploy.sh`:
 | File | Destination | Purpose |
 |------|-------------|---------|
 | `config/hey-lantern.service` | `/etc/systemd/system/` | Systemd unit — start on boot |
-| `config/secrets.env.example` | `/etc/hey-lantern/` | API key template (no real keys in repo) |
-| `config/audio.conf` | `/etc/asound.conf` | ALSA config for I2S mic + amp routing |
+| `config/audio.conf` | `/etc/asound.conf` | ALSA config — USB capture device as default |
 
 ## SSH Access
 
 ```bash
-ssh -i ~/.ssh/pi_key pi@hey-lantern.local
+ssh -i ~/.ssh/elkpi_key matt@elkpi02.local
 ```
 
 ## Provisioning (Fresh Flash)
 
-After flashing Bookworm Lite with hostname `hey-lantern` and SSH key configured:
+After flashing Bookworm Lite with hostname `elkpi02` and SSH key configured:
 
 ```bash
 bash projects/hey-lantern/scripts/setup.sh
@@ -103,6 +112,5 @@ bash projects/hey-lantern/scripts/deploy.sh
 
 - [antique-telephone-ai-operator](../antique-telephone-ai-operator/) — similar Claude API
   voice pipeline on Pi 5; check its software setup for patterns to reuse
-- Porcupine Python SDK: https://github.com/Picovoice/porcupine
 - openWakeWord: https://github.com/dscripka/openWakeWord
 - Anthropic Python SDK: https://github.com/anthropics/anthropic-sdk-python

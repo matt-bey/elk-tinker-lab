@@ -1,0 +1,16 @@
+[Unit]
+Description=Hey Lantern voice assistant
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=matt
+WorkingDirectory=/home/matt/hey-lantern
+EnvironmentFile=/home/matt/hey-lantern/.env
+ExecStart=/home/matt/.local/bin/uv run python src/main.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
